@@ -10,7 +10,7 @@ helper:
 create day: helper
   #!/usr/bin/env bash
   cargo generate --path ./template --name {{day}}
-  ./target/release/helper --name {{day}}
+  ./target/release/helper --project {{day}}
 
 run day part:
   cargo run -p {{day}} --bin {{part}}

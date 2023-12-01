@@ -10,12 +10,12 @@ use clap::Parser;
 struct Args {
     /// Name of the person to greet
     #[arg(short, long)]
-    name: String,
+    project: String,
 }
 
 fn update_toml(entry: &str) -> Result<(), Box<dyn Error>> {
     let cargo_config = include_str!("../../Cargo.toml");
-    let mut doc = cargo_config.parse::<Document>().expect("Invalid doc");
+    let mut doc = cargo_config.parse::<Document>()?;
     let arr = toml_edit::Array::new();
     let mut members = match doc["workspace"]["members"].as_array().cloned() {
         Some(a) => a,
@@ -37,5 +37,5 @@ fn update_toml(entry: &str) -> Result<(), Box<dyn Error>> {
 fn main() {
     let args = Args::parse();
 
-    update_toml(&args.name).expect("Error while updating config")
+    update_toml(&args.project).expect("Error while updating config")
 }
