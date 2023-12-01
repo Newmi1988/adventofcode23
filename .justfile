@@ -14,3 +14,10 @@ create day: helper
 
 run day part:
   cargo run -p {{day}} --bin {{part}}
+
+build day part:
+  cargo build -p {{day}} --bin {{part}}
+
+# run the test of day and part
+test day part:
+  cargo test -p {{day}} --bin {{part}}
