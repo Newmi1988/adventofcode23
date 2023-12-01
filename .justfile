@@ -4,3 +4,13 @@ add package:
   cd {{invocation_directory()}}
   cargo new {{package}}
 
+helper:
+  cargo build -p helper --release
+
+create day: helper
+  #!/usr/bin/env bash
+  cargo generate --path ./template --name {{day}}
+  ./target/release/helper --name {{day}}
+
+run day part:
+  cargo run -p {{day}} --bin {{part}}
