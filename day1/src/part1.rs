@@ -6,13 +6,10 @@ pub fn process(_input: &str) -> miette::Result<String, AocError> {
         println!("Line: {}", line);
         let number = line
             .chars()
-            .filter_map(|char| match char.is_numeric() {
-                true => Some(char),
-                false => None,
-            })
+            .filter(|char| char.is_numeric())
             .collect::<String>();
         println!("Extracted number {}", number);
-        if number.len() >= 1 {
+        if !number.is_empty() {
             let first_character: char = number.chars().next().unwrap();
             let last_character: char = number.chars().next_back().unwrap();
             let concat_numer: u32 = format!("{}{}", first_character, last_character)
