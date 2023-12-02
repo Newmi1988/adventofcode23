@@ -3,12 +3,10 @@ use crate::custom_error::AocError;
 pub fn process(_input: &str) -> miette::Result<String, AocError> {
     let mut valid_numbers: Vec<u32> = Vec::new();
     for line in _input.lines() {
-        println!("Line: {}", line);
         let number = line
             .chars()
             .filter(|char| char.is_numeric())
             .collect::<String>();
-        println!("Extracted number {}", number);
         if !number.is_empty() {
             let first_character: char = number.chars().next().unwrap();
             let last_character: char = number.chars().next_back().unwrap();
@@ -18,12 +16,10 @@ pub fn process(_input: &str) -> miette::Result<String, AocError> {
             valid_numbers.push(concat_numer)
         }
     }
-
-    println!("{:?}", &valid_numbers);
-
-    let calibration: u32 = valid_numbers.iter().sum();
-
-    Ok(calibration.to_string())
+    println!("Found the following numbers {:?}",&valid_numbers);
+    let calibration_number: u32 = valid_numbers.iter().sum();
+    println!("Calculated calibration number: {}", calibration_number);
+    Ok(calibration_number.to_string())
 }
 
 #[cfg(test)]
